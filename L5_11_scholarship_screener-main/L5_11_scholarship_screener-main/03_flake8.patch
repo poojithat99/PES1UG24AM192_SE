@@ -1,0 +1,56 @@
+--- a/scholarship_system.py
++++ b/scholarship_system.py
+@@ -30,7 +30,9 @@
+             _evaluate_node(node.left, variables),
+             _evaluate_node(node.right, variables),
+         )
+-    if isinstance(node, ast.UnaryOp) and isinstance(node.op, (ast.UAdd, ast.USub)):
++    if isinstance(node, ast.UnaryOp) and isinstance(
++        node.op, (ast.UAdd, ast.USub)
++    ):
+         value = _evaluate_node(node.operand, variables)
+         return value if isinstance(node.op, ast.UAdd) else -value
+     if isinstance(node, ast.Name) and node.id in variables:
+@@ -110,12 +112,18 @@
+             payload = Path(file_path).read_text(encoding="utf-8")
+             data = json.loads(payload)
+         except (OSError, json.JSONDecodeError) as exc:
+-            raise ValueError(f"Cannot load scholarship results: {exc}") from exc
++            raise ValueError(
++                f"Cannot load scholarship results: {exc}"
++            ) from exc
+         if not isinstance(data, dict):
+             raise ValueError("Saved results must be a JSON object")
+         for record in data.values():
+-            if not isinstance(record, dict) or not isinstance(record.get("eligible"), bool):
+-                raise ValueError("Saved result has an invalid eligibility field")
++            if not isinstance(record, dict) or not isinstance(
++                record.get("eligible"), bool
++            ):
++                raise ValueError(
++                    "Saved result has an invalid eligibility field"
++                )
+             if not isinstance(record.get("score"), (int, float)):
+                 raise ValueError("Saved result has an invalid score field")
+         self.results = data
+@@ -143,14 +151,18 @@
+         except ValueError as exc:
+             print(f"Skipped {student_id}: {exc}")
+ 
+-    requested_formula = input("Merit formula (Enter to keep default): ").strip()
++    requested_formula = input(
++        "Merit formula (Enter to keep default): "
++    ).strip()
+     if requested_formula:
+         try:
+             screener.change_formula(requested_formula)
+         except ValueError as exc:
+             print(f"Keeping default formula: {exc}")
+ 
+-    screener.evaluate_applicant("U005", {"gpa": 8.4, "credits": 3, "income": 600_000})
++    screener.evaluate_applicant(
++        "U005", {"gpa": 8.4, "credits": 3, "income": 600_000}
++    )
+     screener.persist_results()
+     screener.load_results()
+     screener.print_shortlist()
