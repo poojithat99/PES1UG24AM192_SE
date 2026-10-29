@@ -1,0 +1,7 @@
+************* Module scholarship_system
+scholarship_system.py:46:31: W0622: Redefining built-in 'credits' (redefined-builtin)
+scholarship_system.py:90:8: W0622: Redefining built-in 'credits' (redefined-builtin)
+
+-----------------------------------
+Your code has been rated at 9.82/10
+
