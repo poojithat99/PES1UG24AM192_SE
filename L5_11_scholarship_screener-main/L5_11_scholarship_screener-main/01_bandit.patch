@@ -1,0 +1,93 @@
+--- a/scholarship_system.py
++++ b/scholarship_system.py
+@@ -1,5 +1,7 @@
++import ast
+ import json
+ import math
++import operator
+ import sys
+ # Global state
+ results = {}
+@@ -7,8 +9,44 @@
+ INCOME_LIMIT = 800000
+ CUTOFF = 85
+ 
++# Restrict customizable formulas to arithmetic with known variables.
++_ALLOWED_OPERATORS = {
++    ast.Add: operator.add,
++    ast.Sub: operator.sub,
++    ast.Mult: operator.mul,
++    ast.Div: operator.truediv,
++}
++
++
++def _calculate_node(node, variables):
++    if isinstance(node, ast.Expression):
++        return _calculate_node(node.body, variables)
++    if isinstance(node, ast.BinOp) and type(node.op) in _ALLOWED_OPERATORS:
++        left = _calculate_node(node.left, variables)
++        right = _calculate_node(node.right, variables)
++        return _ALLOWED_OPERATORS[type(node.op)](left, right)
++    if isinstance(node, ast.UnaryOp) and isinstance(node.op, (ast.UAdd, ast.USub)):
++        value = _calculate_node(node.operand, variables)
++        return value if isinstance(node.op, ast.UAdd) else -value
++    if isinstance(node, ast.Name) and node.id in variables:
++        return variables[node.id]
++    if isinstance(node, ast.Constant) and type(node.value) in (int, float):
++        if abs(node.value) <= 1000:
++            return node.value
++    raise ValueError("Formula may only contain basic arithmetic, gpa and credits")
++
++
+ def calculate_merit_score(gpa, credits):
+-    return eval(MERIT_FORMULA)
++    if len(MERIT_FORMULA) > 100:
++        raise ValueError("Formula is too long")
++    try:
++        expression = ast.parse(MERIT_FORMULA, mode="eval")
++        score = _calculate_node(expression, {"gpa": gpa, "credits": credits})
++    except (SyntaxError, ArithmeticError) as exc:
++        raise ValueError("Invalid arithmetic formula") from exc
++    if not math.isfinite(score):
++        raise ValueError("Formula must produce a finite score")
++    return score
+ def evaluate_applicant(student_id, test_scores, logs=[]):
+     gpa = test_scores["gpa"]
+     credits = test_scores.get("credits", 0)
+@@ -21,7 +59,13 @@
+ 
+ def change_formula(new_formula):
+     global MERIT_FORMULA
++    previous_formula = MERIT_FORMULA
+     MERIT_FORMULA = new_formula
++    try:
++        calculate_merit_score(9.0, 2)
++    except ValueError:
++        MERIT_FORMULA = previous_formula
++        raise
+ def persist_results(file="scholarships.json"):
+     f = open(file, "w")
+     f.write(json.dumps(results))
+@@ -31,8 +75,8 @@
+     global results
+     try:
+         results = json.loads(open(file).read())
+-    except:
+-        pass
++    except (OSError, json.JSONDecodeError) as exc:
++        print("Could not load results:", exc)
+ 
+ def printShortlist():
+     print("Shortlisted applicants:")
+@@ -46,7 +90,10 @@
+     evaluate_applicant("U004", {"gpa": 6.5})
+     formula = input("Merit formula (Enter to keep default): ")
+     if formula:
+-        change_formula(formula)
++        try:
++            change_formula(formula)
++        except ValueError as exc:
++            print("Keeping default formula:", exc)
+     evaluate_applicant("U005", {"gpa": 8.4, "credits": 3, "income": 600000})
+     persist_results()
+     load_results()
