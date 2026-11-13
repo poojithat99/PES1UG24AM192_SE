@@ -1,0 +1,3 @@
+# Python 3.10+ (tested with Python 3.12.14)
+hypothesis==6.170.15
+pytest==9.2.0

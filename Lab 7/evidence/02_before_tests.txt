@@ -1,0 +1,221 @@
+============================= test session starts ==============================
+platform linux -- Python 3.12.14, pytest-9.2.0, pluggy-1.7.0
+rootdir: /workspace/scratch/6369f53511a3/lab7/before
+plugins: hypothesis-6.170.15, anyio-4.14.2
+collected 34 items / 31 deselected / 3 selected
+
+test_processor.py FFF                                                    [100%]
+
+=================================== FAILURES ===================================
+__________________ test_validate_height_and_fastpass_no_crash __________________
+  + Exception Group Traceback (most recent call last):
+  |   File "/workspace/scratch/6369f53511a3/lab7/before/test_processor.py", line 19, in test_validate_height_and_fastpass_no_crash
+  |     def test_validate_height_and_fastpass_no_crash(s):
+  |                    ^^^
+  | BaseExceptionGroup: Hypothesis found 3 distinct failures. (3 sub-exceptions)
+  +-+---------------- 1 ----------------
+    | Traceback (most recent call last):
+    |   File "/workspace/scratch/6369f53511a3/lab7/before/test_processor.py", line 21, in test_validate_height_and_fastpass_no_crash
+    |     result = validate_height_and_fastpass(s)
+    |              ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+    |   File "/workspace/scratch/6369f53511a3/lab7/before/processor.py", line 2, in validate_height_and_fastpass
+    |     height_str, pass_str = rider_spec.strip().split(':')
+    |                            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+    | TypeError: a bytes-like object is required, not 'str'
+    | 
+    | During handling of the above exception, another exception occurred:
+    | 
+    | Traceback (most recent call last):
+    |   File "/workspace/scratch/6369f53511a3/lab7/before/test_processor.py", line 23, in test_validate_height_and_fastpass_no_crash
+    |     pytest.fail(f"rider validation crashed for {s!r}: {exc!r}")
+    | Failed: rider validation crashed for b'': TypeError("a bytes-like object is required, not 'str'")
+    | Failing test case: test_validate_height_and_fastpass_no_crash(
+    |     s=b'',
+    | )
+    +---------------- 2 ----------------
+    | Traceback (most recent call last):
+    |   File "/workspace/scratch/6369f53511a3/lab7/before/test_processor.py", line 21, in test_validate_height_and_fastpass_no_crash
+    |     result = validate_height_and_fastpass(s)
+    |              ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+    |   File "/workspace/scratch/6369f53511a3/lab7/before/processor.py", line 2, in validate_height_and_fastpass
+    |     height_str, pass_str = rider_spec.strip().split(':')
+    |     ^^^^^^^^^^^^^^^^^^^^
+    | ValueError: not enough values to unpack (expected 2, got 1)
+    | 
+    | During handling of the above exception, another exception occurred:
+    | 
+    | Traceback (most recent call last):
+    |   File "/workspace/scratch/6369f53511a3/lab7/before/test_processor.py", line 23, in test_validate_height_and_fastpass_no_crash
+    |     pytest.fail(f"rider validation crashed for {s!r}: {exc!r}")
+    | Failed: rider validation crashed for '': ValueError('not enough values to unpack (expected 2, got 1)')
+    | Failing test case: test_validate_height_and_fastpass_no_crash(
+    |     s='',
+    | )
+    +---------------- 3 ----------------
+    | Traceback (most recent call last):
+    |   File "/workspace/scratch/6369f53511a3/lab7/before/test_processor.py", line 21, in test_validate_height_and_fastpass_no_crash
+    |     result = validate_height_and_fastpass(s)
+    |              ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+    |   File "/workspace/scratch/6369f53511a3/lab7/before/processor.py", line 2, in validate_height_and_fastpass
+    |     height_str, pass_str = rider_spec.strip().split(':')
+    |                            ^^^^^^^^^^^^^^^^
+    | AttributeError: 'NoneType' object has no attribute 'strip'
+    | 
+    | During handling of the above exception, another exception occurred:
+    | 
+    | Traceback (most recent call last):
+    |   File "/workspace/scratch/6369f53511a3/lab7/before/test_processor.py", line 23, in test_validate_height_and_fastpass_no_crash
+    |     pytest.fail(f"rider validation crashed for {s!r}: {exc!r}")
+    | Failed: rider validation crashed for None: AttributeError("'NoneType' object has no attribute 'strip'")
+    | Failing test case: test_validate_height_and_fastpass_no_crash(
+    |     s=None,  # or any other generated value
+    | )
+    +------------------------------------
+____________________ test_compute_dispatch_throughput_safe _____________________
+  + Exception Group Traceback (most recent call last):
+  |   File "/workspace/scratch/6369f53511a3/lab7/before/test_processor.py", line 29, in test_compute_dispatch_throughput_safe
+  |     def test_compute_dispatch_throughput_safe(s):
+  |                    ^^^
+  | BaseExceptionGroup: Hypothesis found 4 distinct failures. (4 sub-exceptions)
+  +-+---------------- 1 ----------------
+    | Traceback (most recent call last):
+    |   File "/workspace/scratch/6369f53511a3/lab7/before/test_processor.py", line 31, in test_compute_dispatch_throughput_safe
+    |     result = compute_dispatch_throughput(s)
+    |              ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+    |   File "/workspace/scratch/6369f53511a3/lab7/before/processor.py", line 11, in compute_dispatch_throughput
+    |     riders_str, mins_str = ride_metric_str.split('/')
+    |                            ^^^^^^^^^^^^^^^^^^^^^^^^^^
+    | TypeError: a bytes-like object is required, not 'str'
+    | 
+    | During handling of the above exception, another exception occurred:
+    | 
+    | Traceback (most recent call last):
+    |   File "/workspace/scratch/6369f53511a3/lab7/before/test_processor.py", line 33, in test_compute_dispatch_throughput_safe
+    |     pytest.fail(f"throughput crashed for {s!r}: {exc!r}")
+    | Failed: throughput crashed for b'': TypeError("a bytes-like object is required, not 'str'")
+    | Failing test case: test_compute_dispatch_throughput_safe(
+    |     s=b'',
+    | )
+    +---------------- 2 ----------------
+    | Traceback (most recent call last):
+    |   File "/workspace/scratch/6369f53511a3/lab7/before/test_processor.py", line 31, in test_compute_dispatch_throughput_safe
+    |     result = compute_dispatch_throughput(s)
+    |              ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+    |   File "/workspace/scratch/6369f53511a3/lab7/before/processor.py", line 12, in compute_dispatch_throughput
+    |     riders = float(riders_str)
+    |              ^^^^^^^^^^^^^^^^^
+    | ValueError: could not convert string to float: ''
+    | 
+    | During handling of the above exception, another exception occurred:
+    | 
+    | Traceback (most recent call last):
+    |   File "/workspace/scratch/6369f53511a3/lab7/before/test_processor.py", line 33, in test_compute_dispatch_throughput_safe
+    |     pytest.fail(f"throughput crashed for {s!r}: {exc!r}")
+    | Failed: throughput crashed for '/': ValueError("could not convert string to float: ''")
+    | Failing test case: test_compute_dispatch_throughput_safe(
+    |     s='/',
+    | )
+    +---------------- 3 ----------------
+    | Traceback (most recent call last):
+    |   File "/workspace/scratch/6369f53511a3/lab7/before/test_processor.py", line 31, in test_compute_dispatch_throughput_safe
+    |     result = compute_dispatch_throughput(s)
+    |              ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+    |   File "/workspace/scratch/6369f53511a3/lab7/before/processor.py", line 11, in compute_dispatch_throughput
+    |     riders_str, mins_str = ride_metric_str.split('/')
+    |     ^^^^^^^^^^^^^^^^^^^^
+    | ValueError: not enough values to unpack (expected 2, got 1)
+    | 
+    | During handling of the above exception, another exception occurred:
+    | 
+    | Traceback (most recent call last):
+    |   File "/workspace/scratch/6369f53511a3/lab7/before/test_processor.py", line 33, in test_compute_dispatch_throughput_safe
+    |     pytest.fail(f"throughput crashed for {s!r}: {exc!r}")
+    | Failed: throughput crashed for '': ValueError('not enough values to unpack (expected 2, got 1)')
+    | Failing test case: test_compute_dispatch_throughput_safe(
+    |     s='',
+    | )
+    +---------------- 4 ----------------
+    | Traceback (most recent call last):
+    |   File "/workspace/scratch/6369f53511a3/lab7/before/test_processor.py", line 31, in test_compute_dispatch_throughput_safe
+    |     result = compute_dispatch_throughput(s)
+    |              ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+    |   File "/workspace/scratch/6369f53511a3/lab7/before/processor.py", line 11, in compute_dispatch_throughput
+    |     riders_str, mins_str = ride_metric_str.split('/')
+    |                            ^^^^^^^^^^^^^^^^^^^^^
+    | AttributeError: 'NoneType' object has no attribute 'split'
+    | 
+    | During handling of the above exception, another exception occurred:
+    | 
+    | Traceback (most recent call last):
+    |   File "/workspace/scratch/6369f53511a3/lab7/before/test_processor.py", line 33, in test_compute_dispatch_throughput_safe
+    |     pytest.fail(f"throughput crashed for {s!r}: {exc!r}")
+    | Failed: throughput crashed for None: AttributeError("'NoneType' object has no attribute 'split'")
+    | Failing test case: test_compute_dispatch_throughput_safe(
+    |     s=None,  # or any other generated value
+    | )
+    +------------------------------------
+___________________ test_resolve_safety_restraint_code_safe ____________________
+  + Exception Group Traceback (most recent call last):
+  |   File "/workspace/scratch/6369f53511a3/lab7/before/test_processor.py", line 39, in test_resolve_safety_restraint_code_safe
+  |     def test_resolve_safety_restraint_code_safe(s):
+  |                    ^^^
+  | BaseExceptionGroup: Hypothesis found 2 distinct failures. (2 sub-exceptions)
+  +-+---------------- 1 ----------------
+    | Traceback (most recent call last):
+    |   File "/workspace/scratch/6369f53511a3/lab7/before/test_processor.py", line 41, in test_resolve_safety_restraint_code_safe
+    |     result = resolve_safety_restraint_code(s)
+    |              ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+    |   File "/workspace/scratch/6369f53511a3/lab7/before/processor.py", line 25, in resolve_safety_restraint_code
+    |     return restraint_types[prefix]
+    |            ~~~~~~~~~~~~~~~^^^^^^^^
+    | KeyError: ''
+    | 
+    | During handling of the above exception, another exception occurred:
+    | 
+    | Traceback (most recent call last):
+    |   File "/workspace/scratch/6369f53511a3/lab7/before/test_processor.py", line 43, in test_resolve_safety_restraint_code_safe
+    |     pytest.fail(f"restraint lookup crashed for {s!r}: {exc!r}")
+    | Failed: restraint lookup crashed for '': KeyError('')
+    | Failing test case: test_resolve_safety_restraint_code_safe(
+    |     s='',
+    | )
+    | Explanation:
+    |     These lines were always and only run by failing test cases:
+    |         /workspace/scratch/6369f53511a3/lab7/before/test_processor.py:42
+    +---------------- 2 ----------------
+    | Traceback (most recent call last):
+    |   File "/workspace/scratch/6369f53511a3/lab7/before/test_processor.py", line 41, in test_resolve_safety_restraint_code_safe
+    |     result = resolve_safety_restraint_code(s)
+    |              ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+    |   File "/workspace/scratch/6369f53511a3/lab7/before/processor.py", line 18, in resolve_safety_restraint_code
+    |     prefix = zone_code.strip().upper()[:3]
+    |              ^^^^^^^^^^^^^^^
+    | AttributeError: 'NoneType' object has no attribute 'strip'
+    | 
+    | During handling of the above exception, another exception occurred:
+    | 
+    | Traceback (most recent call last):
+    |   File "/workspace/scratch/6369f53511a3/lab7/before/test_processor.py", line 43, in test_resolve_safety_restraint_code_safe
+    |     pytest.fail(f"restraint lookup crashed for {s!r}: {exc!r}")
+    | Failed: restraint lookup crashed for None: AttributeError("'NoneType' object has no attribute 'strip'")
+    | Failing test case: test_resolve_safety_restraint_code_safe(
+    |     s=None,
+    | )
+    | Explanation:
+    |     These lines were always and only run by failing test cases:
+    |         /workspace/scratch/6369f53511a3/lab7/before/test_processor.py:42
+    +------------------------------------
+=============================== warnings summary ===============================
+../../../../../opt/codex/runtimes/codex-primary-runtime/dependencies/python/lib/python3.12/site-packages/anyio/pytest_plugin.py:14
+  /opt/codex/runtimes/codex-primary-runtime/dependencies/python/lib/python3.12/site-packages/anyio/pytest_plugin.py:14: PytestRemovedIn10Warning: _pytest.python.CallSpec2 has been renamed to CallSpec.
+  The CallSpec2 alias will be removed in pytest 10.
+  Update imports to use CallSpec instead.
+  See https://docs.pytest.org/en/stable/deprecations.html#callspec2-renamed
+    from _pytest.python import CallSpec2
+
+-- Docs: https://docs.pytest.org/en/stable/how-to/capture-warnings.html
+=========================== short test summary info ============================
+FAILED test_processor.py::test_validate_height_and_fastpass_no_crash - BaseEx...
+FAILED test_processor.py::test_compute_dispatch_throughput_safe - BaseExcepti...
+FAILED test_processor.py::test_resolve_safety_restraint_code_safe - BaseExcep...
+================= 3 failed, 31 deselected, 1 warning in 1.00s ==================

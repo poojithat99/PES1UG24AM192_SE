@@ -1,0 +1,18 @@
+$ python processor.py
+Inputs: '140:YES\n48/0\nXYZ_01\n'
+==== Running validate_height_and_fastpass ====
+Enter rider spec (Height:FastPass, e.g. 140:YES): Height 140cm: Approved (FastPass Priority)
+
+==== Running compute_dispatch_throughput ====
+Enter riders/mins (e.g. 48/2.5): Traceback (most recent call last):
+  File "/workspace/scratch/6369f53511a3/lab7/before/processor.py", line 41, in <module>
+    main()
+  File "/workspace/scratch/6369f53511a3/lab7/before/processor.py", line 34, in main
+    print("Throughput (riders/min):", compute_dispatch_throughput(t_input))
+                                      ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/workspace/scratch/6369f53511a3/lab7/before/processor.py", line 14, in compute_dispatch_throughput
+    rate = riders / cycle_mins
+           ~~~~~~~^~~~~~~~~~~~
+ZeroDivisionError: float division by zero
+
+Exit code: 1

@@ -1,0 +1,12 @@
+$ python processor.py
+Inputs: '140:YES\n48/0\nXYZ_01\n'
+==== Running validate_height_and_fastpass ====
+Enter rider spec (Height:FastPass, e.g. 140:YES): Height 140cm: Approved (FastPass Priority)
+
+==== Running compute_dispatch_throughput ====
+Enter riders/mins (e.g. 48/2.5): Invalid ride metrics: use finite riders >= 0 and minutes > 0
+
+==== Running resolve_safety_restraint_code ====
+Enter ride zone code (e.g. CST_01, WTR_A): Restraint: Unknown restraint code
+
+Exit code: 0
